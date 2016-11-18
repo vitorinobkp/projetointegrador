@@ -1,7 +1,9 @@
-package br.com.estoque;
+package view;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -17,17 +19,14 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JMenuBar;
 
 public class Sistema {
 
 	private JFrame frmPiEstoque;
 	private JLabel lblControleDeEstoque;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txtCodigo;
+	private JTextField txtProduto;
+	private JTextField txtQuantidade;
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTable table;
@@ -84,10 +83,10 @@ public class Sistema {
 		lblCdigo.setBounds(10, 11, 46, 14);
 		pnlCadastro.add(lblCdigo);
 		
-		textField = new JTextField();
-		textField.setBounds(95, 8, 264, 20);
-		pnlCadastro.add(textField);
-		textField.setColumns(10);
+		txtCodigo = new JTextField();
+		txtCodigo.setBounds(95, 8, 264, 20);
+		pnlCadastro.add(txtCodigo);
+		txtCodigo.setColumns(10);
 		
 		JLabel lblProduto = new JLabel("Produto:");
 		lblProduto.setBounds(10, 36, 70, 14);
@@ -101,66 +100,69 @@ public class Sistema {
 		lblQuantidade.setBounds(10, 86, 70, 14);
 		pnlCadastro.add(lblQuantidade);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Compatibilidade de Software", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(369, 11, 168, 100);
-		pnlCadastro.add(panel);
-		panel.setLayout(null);
+		JPanel pnlCopatSoft = new JPanel();
+		pnlCopatSoft.setBorder(new TitledBorder(null, "Compatibilidade de Software", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnlCopatSoft.setBounds(369, 11, 168, 100);
+		pnlCadastro.add(pnlCopatSoft);
+		pnlCopatSoft.setLayout(null);
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("GNU/Linux");
 		chckbxNewCheckBox.setBounds(6, 21, 97, 23);
-		panel.add(chckbxNewCheckBox);
+		pnlCopatSoft.add(chckbxNewCheckBox);
 		
 		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Windows");
 		chckbxNewCheckBox_1.setBounds(6, 47, 97, 23);
-		panel.add(chckbxNewCheckBox_1);
+		pnlCopatSoft.add(chckbxNewCheckBox_1);
 		
 		JCheckBox chckbxOutros = new JCheckBox("Outros");
 		chckbxOutros.setBounds(6, 73, 97, 23);
-		panel.add(chckbxOutros);
+		pnlCopatSoft.add(chckbxOutros);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "Compatibilidade de Hardware", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(369, 141, 168, 118);
-		pnlCadastro.add(panel_1);
-		panel_1.setLayout(null);
+		JPanel CompatHard = new JPanel();
+		CompatHard.setBorder(new TitledBorder(null, "Compatibilidade de Hardware", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		CompatHard.setBounds(369, 141, 168, 118);
+		pnlCadastro.add(CompatHard);
+		CompatHard.setLayout(null);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Selecione o modelo", "Socket 1156", "Socket 1155", "Socket 1150", "Socket 775"}));
-		comboBox.setBounds(10, 22, 148, 20);
-		panel_1.add(comboBox);
+		JComboBox cbModelo = new JComboBox();
+		cbModelo.setEditable(true);
+		cbModelo.setModel(new DefaultComboBoxModel(new String[] {"Selecione o modelo", "Socket 1156", "Socket 1155", "Socket 1150", "Socket 775"}));
+		cbModelo.setBounds(10, 22, 148, 20);
+		CompatHard.add(cbModelo);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Selecione o slot", "DDR2", "DDR3", "DDR4"}));
-		comboBox_1.setBounds(10, 53, 148, 20);
-		panel_1.add(comboBox_1);
+		JComboBox cbSlot = new JComboBox();
+		cbSlot.setEditable(true);
+		cbSlot.setModel(new DefaultComboBoxModel(new String[] {"Selecione o slot", "DDR2", "DDR3", "DDR4"}));
+		cbSlot.setBounds(10, 53, 148, 20);
+		CompatHard.add(cbSlot);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"Selecione o encapsulamento", "DIP", "SOJ", "TSOP", "CSP"}));
-		comboBox_2.setBounds(10, 84, 148, 20);
-		panel_1.add(comboBox_2);
+		JComboBox cbEncapsulamento = new JComboBox();
+		cbEncapsulamento.setEditable(true);
+		cbEncapsulamento.setModel(new DefaultComboBoxModel(new String[] {"Selecione o encapsulamento", "DIP", "SOJ", "TSOP", "CSP"}));
+		cbEncapsulamento.setBounds(10, 84, 148, 20);
+		CompatHard.add(cbEncapsulamento);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(95, 33, 264, 20);
-		pnlCadastro.add(textField_1);
-		textField_1.setColumns(10);
+		txtProduto = new JTextField();
+		txtProduto.setBounds(95, 33, 264, 20);
+		pnlCadastro.add(txtProduto);
+		txtProduto.setColumns(10);
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(95, 108, 264, 151);
 		pnlCadastro.add(textArea);
 		
-		JLabel lblDescrio = new JLabel("Descri\u00E7\u00E3o: ");
-		lblDescrio.setBounds(10, 108, 70, 14);
-		pnlCadastro.add(lblDescrio);
+		JLabel lblDescricao = new JLabel("Descri\u00E7\u00E3o: ");
+		lblDescricao.setBounds(10, 108, 70, 14);
+		pnlCadastro.add(lblDescricao);
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField();
-		formattedTextField.setBounds(95, 58, 264, 20);
-		pnlCadastro.add(formattedTextField);
+		JFormattedTextField fTxtPreco = new JFormattedTextField();
+		fTxtPreco.setBounds(95, 58, 264, 20);
+		pnlCadastro.add(fTxtPreco);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(95, 83, 264, 20);
-		pnlCadastro.add(textField_2);
-		textField_2.setColumns(10);
+		txtQuantidade = new JTextField();
+		txtQuantidade.setBounds(95, 83, 264, 20);
+		pnlCadastro.add(txtQuantidade);
+		txtQuantidade.setColumns(10);
 		
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.setBounds(95, 283, 89, 23);
@@ -174,47 +176,47 @@ public class Sistema {
 		tabbedPane.addTab("Vendas", null, pnlVendas, null);
 		pnlVendas.setLayout(null);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(null, "Itens da Venda", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(10, 175, 527, 107);
-		pnlVendas.add(panel_2);
-		panel_2.setLayout(null);
-		
-		table = new JTable();
-		table.setBounds(10, 17, 499, 79);
-		panel_2.add(table);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(null, "Produto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBounds(10, 11, 527, 153);
-		pnlVendas.add(panel_3);
-		panel_3.setLayout(null);
+		JPanel pnlProduto = new JPanel();
+		pnlProduto.setBorder(new TitledBorder(null, "Produto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnlProduto.setBounds(10, 11, 527, 153);
+		pnlVendas.add(pnlProduto);
+		pnlProduto.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("C\u00F3digo:");
 		lblNewLabel.setBounds(10, 24, 51, 14);
-		panel_3.add(lblNewLabel);
+		pnlProduto.add(lblNewLabel);
 		
 		textField_3 = new JTextField();
 		textField_3.setBounds(59, 21, 86, 20);
-		panel_3.add(textField_3);
+		pnlProduto.add(textField_3);
 		textField_3.setColumns(10);
 		
 		JLabel lblProduto_1 = new JLabel("Produto: ");
 		lblProduto_1.setBounds(155, 24, 65, 14);
-		panel_3.add(lblProduto_1);
+		pnlProduto.add(lblProduto_1);
 		
 		textField_4 = new JTextField();
 		textField_4.setBounds(202, 21, 188, 20);
-		panel_3.add(textField_4);
+		pnlProduto.add(textField_4);
 		textField_4.setColumns(10);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.setBounds(400, 20, 109, 23);
-		panel_3.add(btnPesquisar);
+		pnlProduto.add(btnPesquisar);
 		
 		table_1 = new JTable();
 		table_1.setBounds(10, 54, 499, 79);
-		panel_3.add(table_1);
+		pnlProduto.add(table_1);
+		
+		JPanel pnlItensVendas = new JPanel();
+		pnlItensVendas.setBorder(new TitledBorder(null, "Itens da Venda", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnlItensVendas.setBounds(10, 175, 527, 107);
+		pnlVendas.add(pnlItensVendas);
+		pnlItensVendas.setLayout(null);
+		
+		table = new JTable();
+		table.setBounds(10, 17, 499, 79);
+		pnlItensVendas.add(table);
 		
 		JButton btnFinalizar = new JButton("Finalizar Venda");
 		btnFinalizar.setBounds(413, 283, 124, 23);
@@ -239,10 +241,6 @@ public class Sistema {
 		JButton button = new JButton("Relat\u00F3rio de Clientes");
 		button.setBounds(358, 11, 164, 23);
 		pnlRelatorios.add(button);
-		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(10, 45, 164, 23);
-		pnlRelatorios.add(btnNewButton);
 		
 		JButton btnSair = new JButton("Sair");
 		btnSair.setBounds(473, 426, 89, 23);
