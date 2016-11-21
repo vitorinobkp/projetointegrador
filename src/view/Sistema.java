@@ -32,9 +32,6 @@ public class Sistema {
 	private JTable table;
 	private JTable table_1;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -48,16 +45,10 @@ public class Sistema {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public Sistema() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frmPiEstoque = new JFrame();
 		frmPiEstoque.setTitle("PI - Estoque");
@@ -84,7 +75,7 @@ public class Sistema {
 		pnlCadastro.add(lblCdigo);
 
 		txtCodigo = new JTextField();
-		txtCodigo.setBounds(95, 8, 264, 20);
+		txtCodigo.setBounds(95, 8, 134, 20);
 		pnlCadastro.add(txtCodigo);
 		txtCodigo.setColumns(10);
 
@@ -129,25 +120,25 @@ public class Sistema {
 		JComboBox cbModelo = new JComboBox();
 		cbModelo.setEditable(true);
 		cbModelo.setModel(new DefaultComboBoxModel(
-				new String[] { "Selecione o modelo", "Socket 1156", "Socket 1155", "Socket 1150", "Socket 775" }));
+				new String[] { "Selec. o modelo socket", "Socket 1156", "Socket 1155", "Socket 1150", "Socket 775" }));
 		cbModelo.setBounds(10, 22, 148, 20);
 		CompatHard.add(cbModelo);
 
 		JComboBox cbSlot = new JComboBox();
 		cbSlot.setEditable(true);
-		cbSlot.setModel(new DefaultComboBoxModel(new String[] { "Selecione o slot", "DDR2", "DDR3", "DDR4" }));
+		cbSlot.setModel(new DefaultComboBoxModel(new String[] { "Selec. modelo de slot", "DDR2", "DDR3", "DDR4" }));
 		cbSlot.setBounds(10, 53, 148, 20);
 		CompatHard.add(cbSlot);
 
 		JComboBox cbEncapsulamento = new JComboBox();
 		cbEncapsulamento.setEditable(true);
 		cbEncapsulamento.setModel(
-				new DefaultComboBoxModel(new String[] { "Selecione o encapsulamento", "DIP", "SOJ", "TSOP", "CSP" }));
+				new DefaultComboBoxModel(new String[] { "Selec. o encapsulamento", "DIP", "SOJ", "TSOP", "CSP" }));
 		cbEncapsulamento.setBounds(10, 84, 148, 20);
 		CompatHard.add(cbEncapsulamento);
 
 		txtProduto = new JTextField();
-		txtProduto.setBounds(95, 33, 264, 20);
+		txtProduto.setBounds(95, 33, 134, 20);
 		pnlCadastro.add(txtProduto);
 		txtProduto.setColumns(10);
 
@@ -167,14 +158,46 @@ public class Sistema {
 		txtQuantidade.setBounds(95, 83, 264, 20);
 		pnlCadastro.add(txtQuantidade);
 		txtQuantidade.setColumns(10);
-
+		
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String codigo = lblCdigo.getText();
+				String produto = lblProduto.getText();
+				String preco = lblPreo.getText();
+				String quantidade = lblQuantidade.getText();
+				String descricao = lblDescricao.getText();
+			}
+		});
 		btnSalvar.setBounds(95, 283, 89, 23);
 		pnlCadastro.add(btnSalvar);
 
 		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtCodigo.setText("");
+				txtProduto.setText("");
+				// txtPreo.setText("");
+				txtQuantidade.setText("");
+				// txtDescricao.setText("");
+
+			}
+
+		});
 		btnExcluir.setBounds(270, 283, 89, 23);
 		pnlCadastro.add(btnExcluir);
+
+		JButton btnPesquisar_1 = new JButton("Pesquisar");
+		btnPesquisar_1.setBounds(251, 7, 108, 23);
+		pnlCadastro.add(btnPesquisar_1);
+
+		JButton btnPesquisar_2 = new JButton("Pesquisar");
+		btnPesquisar_2.setBounds(251, 32, 108, 23);
+		pnlCadastro.add(btnPesquisar_2);
+
+		JButton btnEditar = new JButton("Editar");
+		btnEditar.setBounds(183, 283, 89, 23);
+		pnlCadastro.add(btnEditar);
 
 		JPanel pnlVendas = new JPanel();
 		tabbedPane.addTab("Vendas", null, pnlVendas, null);
@@ -182,7 +205,7 @@ public class Sistema {
 
 		JPanel pnlProduto = new JPanel();
 		pnlProduto.setBorder(new TitledBorder(null, "Produto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlProduto.setBounds(10, 11, 527, 153);
+		pnlProduto.setBounds(10, 11, 527, 135);
 		pnlVendas.add(pnlProduto);
 		pnlProduto.setLayout(null);
 
@@ -209,23 +232,31 @@ public class Sistema {
 		pnlProduto.add(btnPesquisar);
 
 		table_1 = new JTable();
-		table_1.setBounds(10, 54, 499, 79);
+		table_1.setBounds(10, 54, 499, 70);
 		pnlProduto.add(table_1);
 
 		JPanel pnlItensVendas = new JPanel();
 		pnlItensVendas.setBorder(
 				new TitledBorder(null, "Itens da Venda", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlItensVendas.setBounds(10, 175, 527, 107);
+		pnlItensVendas.setBounds(10, 189, 527, 93);
 		pnlVendas.add(pnlItensVendas);
 		pnlItensVendas.setLayout(null);
 
 		table = new JTable();
-		table.setBounds(10, 17, 499, 79);
+		table.setBounds(10, 21, 499, 69);
 		pnlItensVendas.add(table);
 
 		JButton btnFinalizar = new JButton("Finalizar Venda");
-		btnFinalizar.setBounds(413, 283, 124, 23);
+		btnFinalizar.setBounds(413, 283, 106, 23);
 		pnlVendas.add(btnFinalizar);
+
+		JButton btnNewButton = new JButton("Adicionar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.setBounds(413, 157, 106, 23);
+		pnlVendas.add(btnNewButton);
 
 		JPanel pnlRelatorios = new JPanel();
 		tabbedPane.addTab("Relat\u00F3rios", null, pnlRelatorios, null);

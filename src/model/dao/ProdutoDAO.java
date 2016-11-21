@@ -2,6 +2,7 @@ package model.dao;
 
 import model.CompatibilidadeHardware;
 import model.Produto;
+import java.sql.*;
 
 public class ProdutoDAO {
 	public String cadastrar(Produto produto) {
