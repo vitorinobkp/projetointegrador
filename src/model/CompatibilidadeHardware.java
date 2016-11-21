@@ -17,6 +17,7 @@ public class CompatibilidadeHardware {
 	public void setSlot(String slot) {
 		this.slot = slot;
 	}
+
 	public String getEcapsulamento() {
 		return encapsulamento;
 	}

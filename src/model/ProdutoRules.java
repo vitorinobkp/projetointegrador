@@ -17,20 +17,22 @@ public class ProdutoRules {
 		if (produto.compatibilidadeSoftware == null || produto.compatibilidadeSoftware.size() <= 0) {
 			return "Informe ao menos uma compatibilidade de Software.";
 		}
-		if(validarCompatibilidadeHardware(produto)){
+		if (validarCompatibilidadeHardware(produto)) {
 			return "Informe ao menos uma compatibilidade de HardWare.";
 		}
 		return null;
 	}
-	
-	public boolean validarCompatibilidadeHardware(Produto produto){
+
+	public boolean validarCompatibilidadeHardware(Produto produto) {
 		boolean valido = true;
-		if(produto.compatibilidadeHardware.slot == null || produto.compatibilidadeHardware.slot.equals("")){
+		if (produto.compatibilidadeHardware.slot == null || produto.compatibilidadeHardware.slot.equals("")) {
 			valido = false;
-		} else if(produto.compatibilidadeHardware.modelo == null || produto.compatibilidadeHardware.modelo.equals("")){
+		} else if (produto.compatibilidadeHardware.modelo == null
+				|| produto.compatibilidadeHardware.modelo.equals("")) {
 			valido = false;
-		} else if(produto.compatibilidadeHardware.encapsulamento == null || produto.compatibilidadeHardware.encapsulamento.equals("")){
-			valido = false; 
+		} else if (produto.compatibilidadeHardware.encapsulamento == null
+				|| produto.compatibilidadeHardware.encapsulamento.equals("")) {
+			valido = false;
 		}
 		return valido;
 	}
